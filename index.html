@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚽ CALCIO ARENA</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- SCREENS -->
+<div id="screen-menu" class="screen active">
+  <div class="menu-bg"></div>
+  <div class="menu-content">
+    <div class="title-wrap">
+      <div class="title-ball">⚽</div>
+      <h1>CALCIO<br><span>ARENA</span></h1>
+      <p class="subtitle">IL GRANDE CALCIO IN PIXEL</p>
+    </div>
+    <div class="menu-options">
+      <button class="menu-btn" id="btn-1p">🎮 1 GIOCATORE  <span>vs CPU</span></button>
+      <button class="menu-btn" id="btn-2p">👥 2 GIOCATORI  <span>locale</span></button>
+    </div>
+    <div class="difficulty-row">
+      <span>DIFFICOLTÀ CPU:</span>
+      <button class="diff-btn active" data-diff="easy">FACILE</button>
+      <button class="diff-btn" data-diff="medium">MEDIO</button>
+      <button class="diff-btn" data-diff="hard">DIFFICILE</button>
+    </div>
+    <div class="time-row">
+      <span>DURATA PARTITA:</span>
+      <button class="time-btn active" data-time="90">90s</button>
+      <button class="time-btn" data-time="180">3 min</button>
+      <button class="time-btn" data-time="300">5 min</button>
+    </div>
+    <div class="controls-hint">
+      <div class="ctrl-col">
+        <strong>GIOCATORE 1</strong>
+        <span>WASD = Muovi</span>
+        <span>SPAZIO = Tiro / Tackle</span>
+        <span>SHIFT = Sprint</span>
+      </div>
+      <div class="ctrl-col">
+        <strong>GIOCATORE 2</strong>
+        <span>↑↓←→ = Muovi</span>
+        <span>ENTER = Tiro / Tackle</span>
+        <span>RSHIFT = Sprint</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="screen-game" class="screen">
+  <div id="scoreboard">
+    <div class="team home">
+      <span class="team-name" id="team-home">AZZURRI</span>
+      <span class="team-score" id="score-home">0</span>
+    </div>
+    <div class="match-info">
+      <div id="timer-display">00:00</div>
+      <div id="match-period">1° TEMPO</div>
+    </div>
+    <div class="team away">
+      <span class="team-score" id="score-away">0</span>
+      <span class="team-name" id="team-away">ROSSI</span>
+    </div>
+  </div>
+  <canvas id="field" width="900" height="580"></canvas>
+  <div id="event-banner" class="hidden"></div>
+  <div id="pause-overlay" class="hidden">
+    <div class="pause-box">
+      <h2>⏸ PAUSA</h2>
+      <button onclick="resumeGame()">▶ RIPRENDI</button>
+      <button onclick="goMenu()">🏠 MENU</button>
+    </div>
+  </div>
+</div>
+
+<div id="screen-end" class="screen">
+  <div class="end-content">
+    <div id="end-trophy">🏆</div>
+    <h2 id="end-title">PARTITA FINITA</h2>
+    <div id="end-score-big"></div>
+    <div id="end-winner"></div>
+    <div id="end-stats"></div>
+    <div class="end-btns">
+      <button class="menu-btn" onclick="restartGame()">🔄 RIVINCITA</button>
+      <button class="menu-btn" onclick="goMenu()">🏠 MENU</button>
+    </div>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>

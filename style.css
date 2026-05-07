@@ -1,0 +1,260 @@
+/* ══════════════════════════════════════
+   CALCIO ARENA — STYLESHEET
+   ══════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green:   #2d8a3e;
+  --green2:  #267834;
+  --lime:    #7ed321;
+  --white:   #f0f4f8;
+  --gold:    #f5c518;
+  --red:     #e63946;
+  --blue:    #1d6fa4;
+  --dark:    #0d1117;
+  --dark2:   #161b22;
+  --panel:   #1c2333;
+  --border:  rgba(255,255,255,0.08);
+}
+
+html, body {
+  width: 100%; height: 100%;
+  background: var(--dark);
+  color: var(--white);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  overflow: hidden;
+}
+
+/* ── SCREENS ── */
+.screen { display: none; width: 100%; height: 100vh; }
+.screen.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+/* ── MENU ── */
+#screen-menu { position: relative; overflow: hidden; }
+
+.menu-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 110%, rgba(45,138,62,0.45) 0%, transparent 70%),
+    radial-gradient(ellipse 100% 60% at 50% -20%, rgba(29,111,164,0.3) 0%, transparent 60%),
+    var(--dark);
+}
+.menu-bg::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg, transparent, transparent 39px,
+    rgba(255,255,255,0.03) 39px, rgba(255,255,255,0.03) 40px
+  ),
+  repeating-linear-gradient(
+    90deg, transparent, transparent 39px,
+    rgba(255,255,255,0.03) 39px, rgba(255,255,255,0.03) 40px
+  );
+}
+
+.menu-content {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+  width: 100%; max-width: 680px; padding: 20px;
+}
+
+.title-wrap { text-align: center; }
+.title-ball { font-size: 60px; animation: bounce 1.2s ease-in-out infinite alternate; display: inline-block; }
+@keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-14px); } }
+
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 72px; line-height: 0.85;
+  letter-spacing: 6px;
+  background: linear-gradient(135deg, #ffffff 0%, var(--gold) 60%, #ff9900 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+}
+h1 span { font-size: 80px; letter-spacing: 8px; }
+.subtitle {
+  font-size: 13px; letter-spacing: 5px; color: rgba(255,255,255,0.45);
+  margin-top: 8px; font-weight: 600;
+}
+
+.menu-options { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+
+.menu-btn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--white);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px; letter-spacing: 2px;
+  padding: 14px 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%;
+}
+.menu-btn span { font-size: 14px; letter-spacing: 1px; opacity: 0.5; font-family: 'Rajdhani', sans-serif; font-weight: 600; }
+.menu-btn:hover { background: rgba(245,197,24,0.15); border-color: var(--gold); transform: translateX(4px); }
+
+.difficulty-row, .time-row {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  font-size: 13px; letter-spacing: 2px; font-weight: 700; color: rgba(255,255,255,0.5);
+}
+
+.diff-btn, .time-btn {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.6);
+  font-family: 'Rajdhani', sans-serif; font-weight: 700;
+  font-size: 13px; letter-spacing: 1px;
+  padding: 6px 14px; border-radius: 5px;
+  cursor: pointer; transition: all 0.15s;
+}
+.diff-btn.active, .time-btn.active {
+  background: rgba(245,197,24,0.2); border-color: var(--gold); color: var(--gold);
+}
+.diff-btn:hover:not(.active), .time-btn:hover:not(.active) {
+  border-color: rgba(255,255,255,0.3); color: var(--white);
+}
+
+.controls-hint {
+  display: flex; gap: 32px; width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 8px; padding: 12px 20px;
+}
+.ctrl-col { display: flex; flex-direction: column; gap: 3px; font-size: 14px; }
+.ctrl-col strong { color: var(--gold); font-size: 13px; letter-spacing: 1px; margin-bottom: 4px; }
+.ctrl-col span { color: rgba(255,255,255,0.5); }
+
+/* ── GAME SCREEN ── */
+#screen-game {
+  background: var(--dark2);
+  padding: 0; gap: 0;
+  justify-content: flex-start;
+}
+
+/* SCOREBOARD */
+#scoreboard {
+  width: 100%; max-width: 900px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 20px 8px;
+  background: var(--dark);
+  border-bottom: 1px solid var(--border);
+}
+.team { display: flex; align-items: center; gap: 12px; }
+.team.away { flex-direction: row-reverse; }
+.team-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; letter-spacing: 2px; color: rgba(255,255,255,0.7);
+}
+.team-score {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px; line-height: 1;
+  min-width: 36px; text-align: center;
+}
+.team.home .team-score { color: #6ab4ff; }
+.team.away .team-score { color: #ff7070; }
+
+.match-info { text-align: center; }
+#timer-display {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px; letter-spacing: 3px; color: var(--gold);
+}
+#match-period { font-size: 11px; letter-spacing: 3px; color: rgba(255,255,255,0.35); font-weight: 700; }
+
+/* CANVAS */
+#field { display: block; max-width: 100%; cursor: none; }
+
+/* EVENT BANNER */
+#event-banner {
+  position: fixed; top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  background: rgba(0,0,0,0.85);
+  border: 3px solid var(--gold);
+  border-radius: 12px;
+  padding: 20px 48px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px; letter-spacing: 6px;
+  color: var(--gold);
+  text-shadow: 0 0 30px rgba(245,197,24,0.8);
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275), opacity 0.3s;
+  z-index: 50;
+}
+#event-banner.show { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+#event-banner.hidden { transform: translate(-50%,-50%) scale(0.5); opacity: 0; }
+
+/* PAUSE */
+#pause-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 80;
+  backdrop-filter: blur(4px);
+}
+#pause-overlay.hidden { display: none; }
+.pause-box {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px 48px;
+  text-align: center;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.pause-box h2 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 3px; color: var(--white); }
+.pause-box button {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--white);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: 2px;
+  padding: 10px 24px; border-radius: 7px;
+  cursor: pointer; transition: all 0.15s;
+}
+.pause-box button:hover { background: rgba(245,197,24,0.2); border-color: var(--gold); }
+
+/* END SCREEN */
+#screen-end {
+  background: var(--dark);
+  position: relative; overflow: hidden;
+}
+#screen-end::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(45,138,62,0.3), transparent 70%);
+}
+.end-content {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  text-align: center; padding: 40px;
+}
+#end-trophy { font-size: 80px; animation: bounce 1s ease-in-out infinite alternate; }
+#end-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px; letter-spacing: 5px;
+  color: var(--gold);
+}
+#end-score-big {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 96px; letter-spacing: 12px; line-height: 1;
+  color: var(--white);
+}
+#end-winner {
+  font-size: 20px; font-weight: 700; letter-spacing: 2px;
+  color: var(--lime); text-transform: uppercase;
+}
+#end-stats {
+  display: flex; gap: 32px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px 28px;
+  font-size: 15px; color: rgba(255,255,255,0.6);
+}
+#end-stats span strong { color: var(--white); }
+.end-btns { display: flex; gap: 12px; margin-top: 8px; width: 100%; max-width: 420px; }
+.end-btns .menu-btn { font-size: 20px; }
+
+/* Particles container */
+#particles { position: fixed; inset: 0; pointer-events: none; z-index: 40; }
